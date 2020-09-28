@@ -8,12 +8,14 @@ module.exports = {
 
         await deleteAktuelleSegemntDauerfromDB();
 
+
         let laengeInKM;
         let dauer;
         let segmentdauerEntrys = []
         let entry = []
         const segmentData = await getSegmenteAndLaengen()
         console.log(segmentData.length)
+
 
         for (let i = 0; i < segmentData.length; i++) {
             hid_a = segmentData[i][0]
@@ -28,7 +30,13 @@ module.exports = {
         }
 
         updateSegmentdauerinDB(segmentdauerEntrys)
+
+
     }
+
+
+
+
 }
 
 async function getSegmenteAndLaengen() {
