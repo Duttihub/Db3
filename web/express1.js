@@ -1,6 +1,7 @@
 const updateVelocity = require('../node/updatevelocity');
 const createTimeTable = require('../node/createTimeTable')
 const anlegenFahrtenSpez = require('../node/fahrtenSpezifikationAnlegen')
+const fahrtenErzeugen = require('../node/fahrtenErzeugen')
 const express = require('express')
 const app = express()
 const port = 3000
@@ -59,6 +60,13 @@ app.get('/trip_spec', async (req, res) => {
         .then(function (result) {
             res.send(result);
         })
+
+
+});
+
+app.get('/gen_trips', async (req, res) => {
+    const { fsid } = req.query;
+    console.log(' i am fsid:' + fsid)
 
 
 });
