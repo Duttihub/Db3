@@ -2,6 +2,7 @@ const updateVelocity = require('../node/updatevelocity');
 const createTimeTable = require('../node/createTimeTable')
 const anlegenFahrtenSpez = require('../node/fahrtenSpezifikationAnlegen')
 const fahrtenErzeugen = require('../node/fahrtenErzeugen')
+const deleteTrips = require('../node/deleteTrips')
 const express = require('express')
 const app = express()
 const port = 3000
@@ -50,11 +51,6 @@ app.get('/schedule', async (req, res) => {
 
 app.get('/trip_spec', async (req, res) => {
     const { ulid, zpid, first, last, freq } = req.query;
-    console.log(' i am ulid:' + ulid)
-    console.log(' i am zpid:' + zpid)
-    console.log(' i am first:' + first)
-    console.log(' i am last:' + last)
-    console.log(' i am freq:' + freq)
 
     anlegenFahrtenSpez.anlegenFahrtenSpezifikation(ulid, zpid, first, last, freq)
         .then(function (result) {
@@ -67,6 +63,23 @@ app.get('/trip_spec', async (req, res) => {
 app.get('/gen_trips', async (req, res) => {
     const { fsid } = req.query;
     console.log(' i am fsid:' + fsid)
+
+    fahrtenErzeugen.fahrtenErzeugen(fsid)
+        .then(function (result) {
+            res.send(result);
+        })
+
+
+});
+
+app.get('/del_trips', async (req, res) => {
+    const { fsid } = req.query;
+    console.log(' i am fsid:' + fsid)
+
+    deleteTrips.deleteTrips(fsid)
+        .then(function (result) {
+            res.send(result);
+        })
 
 
 });
